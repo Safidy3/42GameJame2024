@@ -19,9 +19,4 @@ public class EnemyScript : MonoBehaviour
         }
         agent.destination = player.position;
     }
-
-    void OnTriggerEnter(Collider _enemyCollider)
-    {
-        Debug.Log("The Ennemy has collided");
-    }
 }

@@ -15,30 +15,27 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     public Transform cameraTransform;
 
-
     private GameObject currentKeyPickup = null;
     private GameObject currentCardPickup = null;
     public GameObject door = null;
     public GameObject prefabOldLight = null;
     public GameObject prefabNewLight = null;
 
-
-
     private CharacterController controller;
     private Vector3 playerVelocity;
     private float verticalRotation = 0f;
-    private bool isGrounded;
-    private float gravityValue = -9.81f;
 	private bool gotKey = false;
     public Camera FPSCamera;
     public Camera BFPSCamera;
 
-    private void ShowBFPSView() {
+    private void ShowBFPSView()
+    {
         FPSCamera.enabled = false;
         BFPSCamera.enabled = true;
     }
 
-    private void ShowFPSView() {
+    private void ShowFPSView()
+    {
         FPSCamera.enabled = true;
         BFPSCamera.enabled = false;
     }
@@ -70,7 +67,6 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         HandleRotation();
-        ApplyGravity();
 		HandlePickupInput();
         HandleCamera();
     }
@@ -96,15 +92,6 @@ public class PlayerController : MonoBehaviour
         verticalRotation -= mouseY;
         verticalRotation = Mathf.Clamp(verticalRotation, -maxLookAngle, maxLookAngle);
         cameraTransform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
-    }
-
-    private void ApplyGravity()
-    {
-        isGrounded = controller.isGrounded;
-        if (isGrounded && playerVelocity.y < 0)
-            playerVelocity.y = -2f;
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
     }
 
     private void HandlePickupInput()
