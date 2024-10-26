@@ -30,23 +30,17 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private float gravityValue = -9.81f;
 	private bool gotKey = false;
-    private bool FPSView = true;
-    private bool BFPSView = false;
     public Camera FPSCamera;
     public Camera BFPSCamera;
 
     private void ShowBFPSView() {
         FPSCamera.enabled = false;
         BFPSCamera.enabled = true;
-        FPSView = false;
-        BFPSView = true;
     }
-    
+
     private void ShowFPSView() {
         FPSCamera.enabled = true;
         BFPSCamera.enabled = false;
-        FPSView = true;
-        BFPSView = false;
     }
 
     private void Start()
@@ -160,12 +154,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleCamera()
     {
-        if (Input.GetKeyUp(KeyCode.C) == true)
-        {
-            if (FPSView == true)
-                ShowBFPSView();
-            else if (BFPSView == true)
-                ShowFPSView();
-        }
+        if (Input.GetKeyDown(KeyCode.C))
+            ShowBFPSView();
+        else if (Input.GetKeyUp(KeyCode.C))
+            ShowFPSView();
     }
 }
