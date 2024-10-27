@@ -157,10 +157,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   runSpeed: 10
-  jumpForce: 5
   mouseSensitivity: 2
   maxLookAngle: 80
   cameraTransform: {fileID: 6066733315477887987}
+  FPSCamera: {fileID: 0}
+  BFPSCamera: {fileID: 0}
 --- !u!143 &6203986232808323052
 CharacterController:
   m_ObjectHideFlags: 0

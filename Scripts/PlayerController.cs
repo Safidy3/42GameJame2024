@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,9 +18,9 @@ public class PlayerController : MonoBehaviour
 
     private GameObject currentKeyPickup = null;
     private GameObject currentCardPickup = null;
-    public GameObject door = null;
-    public GameObject prefabOldLight = null;
-    public GameObject prefabNewLight = null;
+    // public GameObject door = null;
+    // public GameObject prefabOldLight = null;
+    // public GameObject prefabNewLight = null;
 
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-		prefabNewLight.SetActive(false);
+		// prefabNewLight.SetActive(false);
         if (controller == null)
         {
             Debug.LogError("CharacterController component missing!");
@@ -110,9 +111,9 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Card collected!");
                 currentCardPickup.SetActive(false);
                 currentCardPickup = null;
-				door.transform.Rotate(new Vector3(0,0,120));
-				prefabOldLight.SetActive(false);
-				prefabNewLight.SetActive(true);
+				// door.transform.Rotate(new Vector3(0,0,120));
+				// prefabOldLight.SetActive(false);
+				// prefabNewLight.SetActive(true);
             }
         }
     }
@@ -129,6 +130,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Near card - Press E to collect");
             currentCardPickup = other.gameObject;
         }
+        else if (other.CompareTag("EnemyTag"))
+        {
+            Debug.Log("GAME OVEEEEEEEER");
+            SceneManager.LoadSceneAsync("GameOver");
+        }
+        else if (other.CompareTag("desk1"))
+            Debug.Log("desk 1");
+        else if (other.CompareTag("desk2"))
+            Debug.Log("desk 2");
     }
 
     private void OnTriggerExit(Collider other)
